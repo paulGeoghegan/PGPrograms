@@ -13,3 +13,13 @@ $("#topOfPage").append(`
 			<a href="about.html"> About</a>
 		</nav>
 `);
+
+$("#bottomOfPage").append(`
+	<h2> Contact Us </h2>
+
+	<a href="https://www.facebook.com"> <img src="../resources/fblogo.png" alt="Facebook logo" height="10%" width="10%"> </a>
+	<a href="https://www.twitter.com"> <img src="../resources/twlogo.png" alt="Twitter logo" height="10%" width="10%"> </a>
+	<a href="https://www.instagram.com"> <img src="../resources/inlogo.jpg" alt="Instagram logo" height="10%" width="10%"> </a>
+	<a href="mailto:c19753889@mytudublin.ie"> <img src="../resources/ml.png" alt="Mail logo" height="10%" width="10%"> </a>
+
+`);

@@ -2,7 +2,7 @@
   "name": "pgprograms",
   "version": "1.0.0",
   "description": "This project is formy web dev assignment",
-  "main": "index.js",
+  "main": "scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

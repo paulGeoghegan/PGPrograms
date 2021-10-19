@@ -1,5 +1,6 @@
 
 $("#topOfPage").append(`
+		<a id="skipToContent" href="#main"> Skip to content </a>
 		<a href="createAccount.html"> Create Account</a>
 		<a href="login.html"> Login</a>
 
@@ -12,9 +13,11 @@ $("#topOfPage").append(`
 			<a href="news.html"> News</a>
 			<a href="about.html"> About</a>
 		</nav>
+		</br>
 `);
 
 $("#bottomOfPage").append(`
+	</br>
 	<h2> Contact Us </h2>
 
 	<a href="https://www.facebook.com"> <img src="../resources/fblogo.png" alt="Facebook logo" height="10%" width="10%"> </a>

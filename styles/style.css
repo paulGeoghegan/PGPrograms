@@ -1,0 +1,14 @@
+
+#skipToContent{
+	left: 50%;
+	position: absolute;
+	transform: translateY(-1000%);
+};
+
+#topOfPage{
+	background-color: black;
+};
+
+#bottomOfPage{
+	background-color:cadetblue;
+};

@@ -1,14 +1,14 @@
 
-#skipToContent{
-	left: 50%;
-	position: absolute;
-	transform: translateY(-1000%);
+.topOfPage{
+	background-color: navy;
 };
 
-#topOfPage{
-	background-color: black;
+
+.middleOfPage{
+	background-color: lightgray;
 };
 
-#bottomOfPage{
-	background-color:cadetblue;
+.bottomOfPage{
+	background-color:cornflowerblue
 };
+

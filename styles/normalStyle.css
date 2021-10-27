@@ -1,22 +1,46 @@
 
+/* These are the styles for the top of the page */
 #topOfPage{
 	background-color: navy;
 	color: lightgray;
+}
+
+#topOfPage h1{
+	text-align: center;
 }
 
 #topOfPage a{
 	color: lightgray;
 }
 
+#skipToContent{
+	font-size: 0%;
+}
+
+#loginLinks{
+	text-align: right;
+	margin-right: 1.5%;
+}
+
+nav{
+	margin-left: 1.5%;
+}
+
+
+/* These are the styles for the middle of the page */
 #middleOfPage{
 	background-color: lightgray;
 }
 
+
+/* These are the styles for the bottom of the page */
 #bottomOfPage{
 	background-color:lightgray;
 	color: navy;
+	text-align: center;
 }
 
-#skipToContent{
-	font-size: 0%;
+/*#bottomOfPage h2{
+	text-align: center;
 }
+*/

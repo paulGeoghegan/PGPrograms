@@ -1,6 +1,11 @@
 
 #topOfPage{
 	background-color: navy;
+	color: lightgray;
+}
+
+#topOfPage a{
+	color: lightgray;
 }
 
 #middleOfPage{
@@ -8,7 +13,8 @@
 }
 
 #bottomOfPage{
-	background-color:cornflowerblue;
+	background-color:lightgray;
+	color: navy;
 }
 
 #skipToContent{

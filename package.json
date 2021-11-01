@@ -2,7 +2,7 @@
   "name": "pgprograms",
   "version": "1.0.0",
   "description": "This project is formy web dev assignment",
-  "main": "scripts/index.js",
+  "main": "public/scripts/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/paulGeoghegan/PGPrograms/issues"
   },
-  "homepage": "https://github.com/paulGeoghegan/PGPrograms#readme"
+  "homepage": "https://github.com/paulGeoghegan/PGPrograms#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
 }

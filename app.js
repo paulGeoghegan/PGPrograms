@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const pgp = require('pg-promise');
 const {PreparedStatement: PS} = require('pg-promise');
-const db = pgp('postgres://user:password@host:5432/databaseName');
+const db = pgp('postgres://postgres:password@host:5432/');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));

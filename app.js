@@ -44,7 +44,8 @@ app.get("classeslist", function(req, res) {
 
     const selectClasses = new PS({
                 name: 'select-classes',
-                text: 'SELECT * FROM classes'});
+                text: 'SELECT * FROM classes ORDER BY classid;'
+        });
     db.any(selectClasses);
                         .then(function(rows) {
                             console.log(rows);

@@ -39,3 +39,25 @@ app.get("/timeTable", function(req, res) {
     res.sendFile(__dirname + "/public/pages/timeTable.html");
 });
 
+//Database roots
+app.get("classeslist", function(req, res) {
+
+    const selectClasses = new PS({
+                name: 'select-classes',
+                text: 'SELECT * FROM classes'});
+    db.any(selectClasses);
+                        .then(function(rows) {
+                            console.log(rows);
+                            res.status(200).json(rows);
+                        })
+                        .catch(function(errors) {
+                            console.log(errors);
+                            res.status(400).json(errors)
+                        });
+                })
+                .catch(function(errors) {
+                    console.log(errors);
+                });
+    }
+
+})

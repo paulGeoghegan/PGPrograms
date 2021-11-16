@@ -10,4 +10,6 @@ CREATE TABLE users(userId serial primary key, name varchar(50), email varchar(50
 
 --Creates classes table and inserts some rows
 CREATE TABLE classes(classId serial primary key, className varchar, classDescription varchar);
-INSERT INTO classes('Programming Basics', 'This is an introductory programming course which will take you through the basics of programming');
+INSERT INTO classes(classname, classdescription) values('Programming Basics', 'This is an introductory programming course which will take you through the basics of programming');
+INSERT INTO classes(classname, classdescription) values('Intermediat Programming', 'This is a followon to the beginner programming class. This class dives more indept into the programming fundimentals and starts to explore concepts such as Object Orientated Programming.');
+

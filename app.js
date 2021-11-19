@@ -40,7 +40,7 @@ app.get("/timeTable", function(req, res) {
 });
 
 //Database roots
-app.get("classeslist", function(req, res) {
+app.get("/classeslist", function(req, res) {
 
     const selectClasses = new PS({
                 name: 'select-classes',

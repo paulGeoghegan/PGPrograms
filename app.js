@@ -55,7 +55,5 @@ app.get("/classeslist", function(req, res) {
                             console.log(errors);
                             res.status(400).json(errors)
                         });
-                })
-    }
+    })
 
-})

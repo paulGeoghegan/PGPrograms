@@ -5,7 +5,7 @@ const { body, validationResult } = require('express-validator');
 const pgp = require('pg-promise')({});
 const { PreparedStatement: PS } = require('pg-promise');
 // connection = protocol://userName:password@host:port/databaseName
-const db = pgp('postgres://postgres:password@localhost:5432/lab6');
+const db = pgp('postgres://postgres:password@localhost:5432/pgprograms');
 
 
 const app = express();
@@ -44,7 +44,7 @@ app.get("/classeslist", function(req, res) {
 
     const selectClasses = new PS({
                 name: 'select-classes',
-                text: 'SELECT * FROM classes ORDER BY classid;'
+                text: 'SELECT * FROM classes ORDER BY classid'
         });
     db.any(selectClasses);
                         .then(function(rows) {

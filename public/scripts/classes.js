@@ -4,11 +4,10 @@ if(document.readyState)
     printClassList();
 }
 
-/*$(document).on("click", "a") function(a)
+function classClick(element)
 {
-    console.log(this.a);
+    console.log(element.id);
 }
-*/
 
 //This function sends the request to get the database rows for the classes page
 function printClassList()
@@ -38,7 +37,7 @@ function processResults(rows, status, xhr) {
 
     //Loops through rows and prints them
     for (let i = 0; i < rows.length; i++) {
-        classtable += `<tr><td> <a id="${rows[i].classid}" href="localhost:3000/class"> ${rows[i].classname} </a></td>`
+        classtable += `<tr><td> <a id="${rows[i].classid}" onclick=${classClick(this)}> ${rows[i].classname} </a></td>`
         classtable += `<td>${rows[i].classlevel}</td></tr>`
     }
     classtable += `

@@ -9,11 +9,11 @@ $("#topOfPage").append(`
 		<h1> Welcome to the `+$("title").text()+`</h1>
 
 		<nav>
-			<a href="http://localhost:3000/"> Home</a>
-			<a href="http://localhost:3000/timetable"> Timetable</a>
-			<a href="http://localhost:3000/classes"> Classes</a>
-			<a href="http://localhost:3000/news"> News</a>
-			<a href="http://localhost:3000/about"> About</a>
+			<a href="/"> Home</a>
+			<a href="/timetable"> Timetable</a>
+			<a href="/classes"> Classes</a>
+			<a href="/news"> News</a>
+			<a href="/about"> About</a>
 		</nav>
 		</br>
 `);

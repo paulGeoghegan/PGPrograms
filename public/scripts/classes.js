@@ -8,9 +8,9 @@ if(document.readyState)
 }
 
 //This function will select the class that the user has selected in order to generate a page for it
-function classClick(element)
+function classClick(id)
 {
-    console.log("test", classList[element.id]);
+    console.log("test", classList[id]);
 }
 
 //This function sends the request to get the database rows for the classes page
@@ -54,12 +54,12 @@ function processResults(rows, status, xhr) {
     classtable += `
         </tbody>
     </table>`;
-    console.log(classList);
+
     //Appends table
     $(classtable).appendTo('#middleOfPage');
 
     //Adds onclick
-    for()
-        $("#"+rows[i].classid).on("click", classClick);
+    for(let i = 0;i < rows.length;i++)
+        $("#"+rows[i].classid).on("click", classClick(rows[i].classid));
 
 }

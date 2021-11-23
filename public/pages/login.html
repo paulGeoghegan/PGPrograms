@@ -10,7 +10,7 @@
 
 	<h1> Please login</h1>
 
-	<div id="loginForm">
+	<form id='loginForm' method="POST" action="/login"></form>
 
 		<label for="email">Email</label>
 		<input id="email" type="email" value="person@example.com"></br>
@@ -18,9 +18,9 @@
 		<label for="password">Password</label>
 		<input id="password" type="password" /></br>
 
-		<input type="button" value="Login" />
+		<input id="submitBtn" type="submit" value="Login" />
 
-	</div>
+	</form>
 
 	<p> Or please <a href="http://localhost:3000/createaccount">Create an account</a> here </p>
 	<p> Back to <a href="http://localhost:3000/">Home </a></p>

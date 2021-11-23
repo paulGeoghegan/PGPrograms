@@ -1,16 +1,95 @@
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const { body, validationResult } = require('express-validator');
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 
 const pgp = require('pg-promise')({});
 const { PreparedStatement: PS } = require('pg-promise');
 // connection = protocol://userName:password@host:port/databaseName
-const db = pgp('postgres://postgres:password@localhost:5432/pgprograms');
+const userName = process.env.username;
+const password = process.env.password;
+const dbName = process.env.dbname
+const db = pgp(`postgres://${userName}:${password}@localhost:5432/${dbName}`);
 
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
+
+// this settings are for development only
+app.use(
+    session({
+        secret: process.env.secret,
+        resave: false,
+        saveUninitialized: false,
+    })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(
+    new LocalStrategy(function (username, password, done) {
+        const findUser = new PS({
+            name: "find-user",
+            text: "SELECT email, password FROM users WHERE email = $1;",
+            values: [email],
+        });
+
+        db.one(findUser)
+            .then(function (row) {
+                if (!row) {
+                    return done(null, false, { message: "User not found." });
+                }
+                bcrypt.compare(
+                    password,
+                    row.user_password,
+                    function (err, result) {
+                        if (result == true) {
+                            done(null, { id: row.user_id });
+                        } else {
+                            return done(null, false, {
+                                message: "Incorrect password",
+                            });
+                        }
+                    }
+                );
+            })
+            .catch(function (error) {
+                return done(error);
+            });
+    })
+);
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    const findUser = new PS({
+        name: "deserialize-user",
+        text: "SELECT user_id FROM users WHERE user_id = $1;",
+        values: [id],
+    });
+    let error;
+    let row;
+    db.one(findUser)
+        .then(function (res) {
+            row = res;
+            console.log(res);
+            console.log("User found!");
+            done(error, res);
+        })
+        .catch(function (err) {
+            error = err;
+            console.log("Error happened!");
+            console.log(err, row);
+        });
+
+});
 
 app.listen(3000, function() {
     console.log('Server running on port 3000');

@@ -102,7 +102,7 @@ app.get("/", function(req, res) {
 app.get("/about", function(req, res) {
     res.sendFile(__dirname + "/public/pages/about.html");
 });
-app.get("/classes", function(req, res) {
+app.get("/classes", isAuthenticated(), function(req, res) {
     res.sendFile(__dirname + "/public/pages/classes.html");
 });
 app.get("/createAccount", function(req, res) {
@@ -162,3 +162,35 @@ app.post("/adduser"), function(req, res) {
         });
 });
 } //End add user
+
+//logs user in
+app.post('/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+        if (err) {
+            console.log(err);
+            return next(err);
+        }
+        if (!user) {
+            console.log(info);
+            return res.redirect('/login');
+        }
+        req.logIn(user, function(err) {
+            if (err) {
+                console.log(err);
+                return next(err);
+            }
+            return res.redirect('/');
+        });
+    })(req, res, next);
+});
+
+//Checks if the user has logged in
+function isAuthenticated() {
+    return function(req, res, next) {
+        if (req.isAuthenticated()) {
+            return next()
+        }
+        res.redirect('/login');
+    }
+}
+

@@ -58,8 +58,9 @@ function processResults(rows, status, xhr) {
     //Appends table
     $(classtable).appendTo('#middleOfPage');
 
+/*
     //Adds onclick
     for(let i = 0;i < rows.length;i++)
         $("#"+rows[i].classid).on("click", classClick(rows[i].classid));
-
+*/
 }

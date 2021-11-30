@@ -10,7 +10,7 @@
 
 	<h1> Please login</h1>
 
-	<form id='loginForm' method="POST" action="/loginuser">
+	<form id='loginForm' >
 
 		<label for="email">Email</label>
 		<input id="email" type="email" value="person@example.com"></br>
@@ -18,12 +18,16 @@
 		<label for="password">Password</label>
 		<input id="password" type="password" /></br>
 
-		<input id="submitBtn" type="submit" value="Login" />
+		<input id="submitBtn" type="button" value="Login" />
 
 	</form>
 
 	<p> Or please <a href="http://localhost:3000/createaccount">Create an account</a> here </p>
 	<p> Back to <a href="http://localhost:3000/">Home </a></p>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+	<script src="scripts/loginFormValidate.js"></script>
 
 </body>
 </html>

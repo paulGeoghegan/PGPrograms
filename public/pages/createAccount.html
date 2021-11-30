@@ -10,7 +10,7 @@
 
 	<h1> Please create an account</h1>
 
-	<form id=createAccountForm" method="post" action="/adduser">
+	<form id="createAccountForm" >
 
 		<label for="email">Email</label>
 		<input id="email" type="email" value="person@example.com"></br>
@@ -18,12 +18,16 @@
 		<label for="password">Password</label>
 		<input id="password" type="password" /></br>
 
-		<input id="createAccount" type="button" value="Create Account" /></br>
+		<input id="submitBtn" type="button" value="Login" />
 
-	</div>
+	</form>
 
-	<p> Or please <a href="http://localhost:3000/login">Login</a> here </p>
+	<p> Or please <a href="http://localhost:3000/login">login</a> here </p>
 	<p> Back to <a href="http://localhost:3000/">Home </a></p>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script>
+	<script src="scripts/createUserFormValidate.js"></script>
 
 </body>
 </html>

@@ -1,4 +1,5 @@
-$('#loginform').validate({
+
+$('#createAccountForm').validate({
 	rules:{
 		email:{
 			required: true,
@@ -40,19 +41,21 @@ function createAjaxPost() {
 		password: $('#password')[0].value
 	}
 
-	const post = $.post('http://localhost:3000/login', data);
+	const post = $.post('http://localhost:3000/adduser', data);
 	post.done(processResults);
 	post.fail(processErrors);
 }
 
-$('#login').click(function() {
-	$('#loginform').submit();
+$('#submitBtn').click(function() {
+	$('#createAccountForm').submit();
 });
 
-function processErrors() {
+function processErrors(message, status, xhr) {
 	console.log('Validation errors');
+	console.log(message, "\n", status, "\n", xhr);
+	$(`<p>${message.responseJSON.message}</p>`).appendTo("#createAccountForm");
 }
 
-function processResults(rows, status, xhr) {
+function processResults(message, status, xhr) {
 	console.log('Data sent to the server');
 }

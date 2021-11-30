@@ -10,7 +10,8 @@ const bcrypt = require("bcrypt");
 const pgp = require('pg-promise')({});
 const { PreparedStatement: PS } = require('pg-promise');
 // connection = protocol://userName:password@host:port/databaseName
-const userName = process.env.username;
+const userName = process.env.dbusername;
+//const userName="postgres";
 const password = process.env.password;
 const dbName = process.env.dbname
 const db = pgp(`postgres://${userName}:${password}@localhost:5432/${dbName}`);
@@ -120,12 +121,14 @@ app.get("/timeTable", function(req, res) {
 
 //Database roots
 app.get("/classeslist", function(req, res) {
-
+    console.log("Before PS");
     const selectClasses = new PS({
                 name: 'select-classes',
                 text: 'SELECT * FROM classes ORDER BY classid;'
         });
+    console.log("Before db.any");
     db.any(selectClasses)
+
                         .then(function(rows) {
                             console.log(rows);
                             res.status(200).json(rows);
@@ -140,18 +143,19 @@ app.get("/classeslist", function(req, res) {
 app.post("/adduser"), function(req, res) {
 
     //Sets variables
-    user = "user";
-    password = "passwd";
+    const email = req.body.email;
+    const password = req.body.password;
     saltRounds = 10;
 
     //hashes password
     bcrypt.hash(password, saltRounds, function (err, hash) {
+    console.log(err);
 
     //Stores user in db
     const insert = new PS({
         name: "insert-user",
-        text: "INSERT INTO users (username, userpassword) VALUES ($1, $2);",
-        values: [user, hash],
+        text: "INSERT INTO users (email, password) VALUES ($1, $2);",
+        values: [email, hash],
     });
     db.none(insert)
         .then(function(rows){
@@ -159,6 +163,7 @@ app.post("/adduser"), function(req, res) {
     })
         .catch(function(error){
             console.log(error);
+            return res.status(400).send(error);
         });
 });
 } //End add user
@@ -172,7 +177,8 @@ app.post('/login', function(req, res, next) {
         }
         if (!user) {
             console.log(info);
-            return res.redirect('/login');
+            return res.status(400).send(info);
+
         }
         req.logIn(user, function(err) {
             if (err) {

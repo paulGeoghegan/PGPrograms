@@ -140,7 +140,7 @@ app.get("/classeslist", function(req, res) {
     })
 
 //Adds a user to the database
-app.post("/adduser"), function(req, res) {
+app.post("/adduser", function(req, res) {
 
     //Sets variables
     const email = req.body.email;
@@ -160,13 +160,14 @@ app.post("/adduser"), function(req, res) {
     db.none(insert)
         .then(function(rows){
             console.log('Success!');
+
     })
         .catch(function(error){
             console.log(error);
             return res.status(400).send(error);
         });
 });
-} //End add user
+}) //End add user
 
 //logs user in
 app.post('/login', function(req, res, next) {
@@ -189,6 +190,19 @@ app.post('/login', function(req, res, next) {
         });
     })(req, res, next);
 });
+
+//Checks if the user is logged in
+app.get("/loggedin", function(req, res) {
+        if (req.isAuthenticated()) {
+            console.log("user loggedin");
+            return 1;
+        } //End if
+        else
+        {
+            console.log("User not loggedin");
+            return 0;
+    } //End else
+}); //end loggedin
 
 //Checks if the user has logged in
 function isAuthenticated() {

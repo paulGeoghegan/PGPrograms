@@ -41,10 +41,29 @@ function createAjaxPost() {
 		password: $('#password')[0].value
 	}
 
-	const post = $.post('http://localhost:3000/adduser', data);
-	post.done(processResults);
-	post.fail(processErrors);
-}
+	//Tries to create a user
+	try
+	{
+
+		const post = $.post('http://localhost:3000/adduser', data);
+		post.done(processResults);
+
+		//Tries to log user in
+		try
+		{
+			const post2 = $.post('http://localhost:3000/login', data);
+			post2.done(processResults);
+		} //End inner try
+		catch{
+			post2.fail(processErrors);
+		} //End catch
+
+	} //End outer try
+	catch{
+		post.fail(processErrors);
+	} //End catch
+
+} //End createAjaxPost
 
 $('#submitBtn').click(function() {
 	$('#createAccountForm').submit();
@@ -57,6 +76,6 @@ function processErrors(message, status, xhr) {
 
 }
 
-function processResults(message, status, xhr) {
-	console.log('Data sent to the server');
+function processResults(message, status, xhr, data) {
+	console.log('User created');
 }

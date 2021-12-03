@@ -42,7 +42,7 @@ function createAjaxPost() {
 		password: $('#password')[0].value
 	}
 
-	const post = $.post('http://localhost:3000/login', data);
+	const post = $.post('/login', data);
 	post.done(processResults);
 	post.fail(processErrors);
 }

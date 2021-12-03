@@ -2,8 +2,6 @@
 $("#topOfPage").append(`
 		<a id="skipToContent" href="#main"> Skip to content </a>
 		<div id="loginLinks">
-			<a href="http://localhost:3000/createAccount"> Create Account</a>
-			<a href="http://localhost:3000/login"> Login</a>
 		</div>
 
 		<h1> Welcome to the `+$("title").text()+`</h1>
@@ -28,3 +26,14 @@ $("#bottomOfPage").append(`
 	<a href="mailto:c19753889@mytudublin.ie"> <img src="resources/ml.png" alt="Mail logo" height="3%" width="3%"> </a>
 
 `);
+
+
+//Checks if the user is logged in or not
+if($.get('/loggedin'))
+{
+	$("#loginLinks").append(`<a href="/account>Account</a>`);
+} //End if
+else
+{
+	$("#loginLinks").append(`<a href="/createAccount">Create Account</a>`);
+}

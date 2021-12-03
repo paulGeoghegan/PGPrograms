@@ -54,6 +54,7 @@ function processErrors(message, status, xhr) {
 	console.log('Validation errors');
 	console.log(message, "\n", status, "\n", xhr);
 	$(`<p>${message.responseJSON.message}</p>`).appendTo("#createAccountForm");
+
 }
 
 function processResults(message, status, xhr) {

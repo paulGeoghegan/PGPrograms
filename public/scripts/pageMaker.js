@@ -29,11 +29,6 @@ $("#bottomOfPage").append(`
 
 
 //Checks if the user is logged in or not
-if($.get('/loggedin'))
-{
-	$("#loginLinks").append(`<a href="/account>Account</a>`);
-} //End if
-else
-{
-	$("#loginLinks").append(`<a href="/createAccount">Create Account</a>`);
-}
+const link = $.get('/loggedin')
+console.log(link.message);
+$('#loginLinks').append(link.message);

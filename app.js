@@ -195,14 +195,16 @@ app.post('/login', function(req, res, next) {
 app.get("/loggedin", function(req, res) {
         if (req.isAuthenticated()) {
             console.log("user loggedin");
-            return data={link:'<a href="/account">Account</a>'};
+            const link ={message:'<a href="/account">Account</a>'};
+            console.log(link.message);
+        res.status(200).json (link);
         } //End if
         else
         {
             console.log("User not loggedin");
 const link={message:'<a href="/createAccount>Create Account</a>'};
             console.log(link.message);
-        res.json (link);
+        res.status(200).json (link);
     } //End else
 }); //end loggedin
 

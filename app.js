@@ -32,19 +32,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-    new LocalStrategy({usernameField:'email', passwordField:'password'}, function (email, password, done) {
-        console.log("start of login");
+    new LocalStrategy({usernameField:'email', passwordField:'password'}, function (username, password, done) {
+
+        console.log("start of login",username);
+
         const findUser = new PS({
             name: "find-user",
-            text: "SELECT email, password FROM users WHERE email = $1;",
-            values: [email],
+            text: "SELECT userid, email, password FROM users WHERE email = $1;",
+            values: [username],
         });
 
-        console.log("email:":);
-        console.log(row.email);
 
         db.one(findUser)
             .then(function (row) {
+                console.log(row.userid, row.email);
+
                 if (!row) {
                     return done(null, false, { message: "User not found." });
                 }
@@ -54,6 +56,7 @@ passport.use(
                     function (err, result) {
                         if (result == true) {
                             done(null, { id: row.userid});
+
                         } else {
                             return done(null, false, {
                                 message: "Incorrect password",
@@ -69,13 +72,14 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
+    console.log(user, done);
     done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
     const findUser = new PS({
         name: "deserialize-user",
-        text: "SELECT userid FROM users WHERE user_id = $1;",
+        text: "SELECT userid FROM users WHERE userid = $1;",
         values: [id],
     });
     let error;
@@ -178,27 +182,33 @@ app.post('/login', function(req, res, next) {
         if (err) {
             console.log(err);
             return next(err);
-        }
-        if (!user) {
+        } //End if
+        else if(!user) {
             console.log(info);
             return res.status(400).send(info);
+        } //End else if
 
-        }
         req.logIn(user, function(err) {
             if (err) {
                 console.log(err);
                 return next(err);
-            }
+            } //End if
+        else{
+            console.log("Redirecting");
             return res.redirect('/');
+        }//End else
+
         });
+        console.log("test1");
     })(req, res, next);
+    console.log("test2");
 });
 
 //Checks if the user is logged in
 app.get("/loggedin", function(req, res) {
         if (req.isAuthenticated()) {
             console.log("user loggedin");
-        link ={message:'<a href="/account">Account</a>'};
+        link ='<a href="/account">Account</a>';
             console.log(link);
         res.status(200).json (link);
         } //End if

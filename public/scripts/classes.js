@@ -16,7 +16,7 @@ function classClick(id)
 //This function sends the request to get the database rows for the classes page
 function printClassList()
 {
-    const get = $.get('http://localhost:3000/classeslist');
+    const get = $.get('/classeslist');
     get.done(processResults);
     get.fail(processErrors);
 }

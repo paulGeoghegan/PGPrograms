@@ -27,8 +27,14 @@ $("#bottomOfPage").append(`
 
 `);
 
-
 //Checks if the user is logged in or not
-const link = $.get('/loggedin')
-console.log(link.message);
-$('#loginLinks').append(link.message);
+const link = $.get('/loggedin');
+link.done(addLinks);
+
+function addLinks(message, status, xhr)
+{
+
+	console.log(message);
+	$('#loginLinks').append(message);
+
+} //End addLinks

@@ -10,11 +10,10 @@ const bcrypt = require("bcrypt");
 const pgp = require('pg-promise')({});
 const { PreparedStatement: PS } = require('pg-promise');
 // connection = protocol://userName:password@host:port/databaseName
-const userName = process.env.dbusername;
-//const userName="postgres";
+const dbUserName = process.env.dbusername;
 const password = process.env.password;
 const dbName = process.env.dbname
-const db = pgp(`postgres://${userName}:${password}@localhost:5432/${dbName}`);
+const db = pgp(`postgres://${dbUserName}:${password}@localhost:5432/${dbName}`);
 
 
 const app = express();
@@ -33,12 +32,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.use(
-    new LocalStrategy(function (username, password, done) {
+    new LocalStrategy({usernameField:'email', passwordField:'password'}, function (email, password, done) {
+        console.log("start of login");
         const findUser = new PS({
             name: "find-user",
             text: "SELECT email, password FROM users WHERE email = $1;",
             values: [email],
         });
+
+        console.log("email:":);
+        console.log(row.email);
 
         db.one(findUser)
             .then(function (row) {
@@ -47,10 +50,10 @@ passport.use(
                 }
                 bcrypt.compare(
                     password,
-                    row.user_password,
+                    row.password,
                     function (err, result) {
                         if (result == true) {
-                            done(null, { id: row.user_id });
+                            done(null, { id: row.userid});
                         } else {
                             return done(null, false, {
                                 message: "Incorrect password",
@@ -72,7 +75,7 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (id, done) {
     const findUser = new PS({
         name: "deserialize-user",
-        text: "SELECT user_id FROM users WHERE user_id = $1;",
+        text: "SELECT userid FROM users WHERE user_id = $1;",
         values: [id],
     });
     let error;

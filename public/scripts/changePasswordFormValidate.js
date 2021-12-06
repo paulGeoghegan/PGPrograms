@@ -34,3 +34,28 @@ function validateFields(element, event) {
 	$(element).valid();
 }
 
+function createAjaxPost() {
+	const data = {
+		password: $('#password')[0].value
+	}
+
+	const post = $.post('/changePassword', data);
+	post.done(processResults);
+	post.fail(processErrors);
+
+} //End createAjaxPost
+
+$('#submitBtn').click(function() {
+	$('#changePasswordForm').submit();
+});
+
+function processErrors(message, status, xhr) {
+	console.log('Validation errors');
+	console.log(message, "\n", status, "\n", xhr);
+	$(`<p>${message.responseJSON.message}</p>`).appendTo("#createAccountForm");
+
+}
+
+function processResults(message, status, xhr, data) {
+	console.log('Password updated');
+}

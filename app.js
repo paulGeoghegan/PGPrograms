@@ -103,9 +103,12 @@ app.listen(3000, function() {
     console.log('Server running on port 3000');
 });
 
-//Sets routs for nav bar
+//Sets routs for nav bar and login links
 app.get("/", function(req, res) {
     res.sendFile(__dirname + "/public/pages/index.html");
+});
+app.get("/account", isAuthenticated(), function(req, res) {
+    res.sendFile(__dirname + "/public/pages/account.html");
 });
 app.get("/about", function(req, res) {
     res.sendFile(__dirname + "/public/pages/about.html");
@@ -175,6 +178,39 @@ app.post("/adduser", function(req, res) {
         });
 });
 }) //End add user
+
+//Changes the users password
+app.post("/changePassword", function(req, res) {
+
+    console.log(req.sessionID);
+
+    //Sets variables
+    const id = req.sessionID.id;
+    const password = req.body.password;
+    saltRounds = 10;
+
+    //hashes password
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+    console.log(err);
+
+    //Changes users password
+    const update = new PS({
+        name: "update-passwword",
+        text: "UPDATE users set password = $1 WHERE userid = $2;",
+        values: [hash, id],
+    });
+    db.none(update)
+        .then(function(rows){
+            console.log('Success! updated password');
+
+    })
+        .catch(function(error){
+            console.log(error);
+            return res.status(400).send(error);
+        });
+});
+}) //End add user
+
 
 //logs user in
 app.post('/login', function(req, res, next) {

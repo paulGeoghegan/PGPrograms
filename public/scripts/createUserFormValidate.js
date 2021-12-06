@@ -20,7 +20,7 @@ $('#createAccountForm').validate({
 			email: 'This is not a valid email'
 		},
 		password:{
-			required: 'Please enter your email',
+			required: 'Please enter your password',
 			minlength: 'Your password must be atleast 8 characters'
 		}
 	},

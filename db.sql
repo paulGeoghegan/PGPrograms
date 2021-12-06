@@ -4,9 +4,13 @@
 --Drops tables
 DROP TABLE users;
 DROP TABLE classes;
+DROP TABLE myclasses;
 
 --Creates users table
 CREATE TABLE users(userId serial primary key, name varchar(50), email varchar(50) UNIQUE, password varchar);
+
+--Creates myclasses table
+CREATE TABLE myclasses();
 
 --Creates classes table and inserts some rows
 CREATE TABLE classes(classId serial primary key, className varchar, classDescription varchar, classlevel varchar);

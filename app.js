@@ -182,11 +182,10 @@ app.post("/adduser", function(req, res) {
 //Changes the users password
 app.post("/changePassword", function(req, res) {
 
-    console.log(req.session.id);
-    console.log(req.userid);
+    console.log(user.id);
 
     //Sets variables
-    const id = req.session.id.id;
+    const id = req.user.id;
     const password = req.body.password;
     saltRounds = 10;
 
@@ -196,7 +195,7 @@ app.post("/changePassword", function(req, res) {
 
     //Changes users password
     const update = new PS({
-        name: "update-passwword",
+        name: "update-password",
         text: "UPDATE users set password = $1 WHERE userid = $2;",
         values: [hash, id],
     });

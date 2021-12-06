@@ -1,6 +1,6 @@
 
 $("#topOfPage").append(`
-		<a id="skipToContent" href="#main"> Skip to content </a>
+		<a id="skipToContent" href="#middleOfPage"> Skip to content </a>
 		<div id="loginLinks">
 		</div>
 

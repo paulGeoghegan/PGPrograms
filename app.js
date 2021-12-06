@@ -182,10 +182,11 @@ app.post("/adduser", function(req, res) {
 //Changes the users password
 app.post("/changePassword", function(req, res) {
 
-    console.log(req.sessionID);
+    console.log(req.session.id);
+    console.log(req.userid);
 
     //Sets variables
-    const id = req.sessionID.id;
+    const id = req.session.id.id;
     const password = req.body.password;
     saltRounds = 10;
 
